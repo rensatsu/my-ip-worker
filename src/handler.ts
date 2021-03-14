@@ -13,7 +13,7 @@ import textAgents from "./utils/text-agents";
  * Collect user info data
  * @param {Request} request Incoming request
  */
-async function getData(request: Request) {
+async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
   let isp = null;
 
@@ -41,7 +41,7 @@ async function getData(request: Request) {
  * Detect data request type
  * @param {Request} request Incoming request
  */
-function detectType(request: Request) {
+function detectType(request: Request): ResponseType {
   const hAccept = request.headers?.get("accept") ?? "";
 
   // Return JSON if requested JSON.
@@ -69,7 +69,10 @@ function detectType(request: Request) {
  * @param {Request} request Incoming request
  * @param {ResponseType} forceType Force response type
  */
-async function handleIpData(request: Request, forceType: ResponseType = ResponseType.HTML) {
+async function handleIpData(
+  request: Request,
+  forceType: ResponseType = ResponseType.HTML,
+): Promise<Response> {
   const data = await getData(request);
   const type = forceType ?? detectType(request);
 

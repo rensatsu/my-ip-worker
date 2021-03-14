@@ -65,7 +65,7 @@ class Infodata {
    * @returns {object}
    * @memberof Infodata
    */
-  toJson() {
+  toJson(): object {
     return {
       ip: this.data.ip,
       country: this.data.country,
