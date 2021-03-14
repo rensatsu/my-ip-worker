@@ -34,7 +34,7 @@ module.exports = function () {
             {
               loader: "svgo-loader",
             },
-          ]
+          ],
         },
         {
           test: /\.(html|liquid|css)?$/,
@@ -42,7 +42,7 @@ module.exports = function () {
             {
               loader: "arraybuffer-loader",
             },
-          ]
+          ],
         },
       ],
     },

@@ -1,5 +1,3 @@
 {
-    "recommendations": [
-        "neilding.language-liquid"
-    ]
+  "recommendations": ["neilding.language-liquid"]
 }
