@@ -39,7 +39,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
     headers: {
       "cache-control": "no-store",
       "content-type": "text/html",
-      "content-security-policy": `default-src 'none'; style-src 'nonce-${nonce}'`,
+      "content-security-policy": `default-src 'none'; img-src 'self'; style-src 'nonce-${nonce}'`,
     },
   });
 }
