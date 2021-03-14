@@ -1,0 +1,7 @@
+dist/
+transpiled/
+worker/
+node_modules/
+.github/
+package.json
+package-lock.json

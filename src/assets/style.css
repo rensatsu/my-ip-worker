@@ -1,0 +1,75 @@
+:root {
+  --color-text: hsl(200deg, 0%, 25%);
+  --color-text-muted: hsl(200deg, 0%, 65%);
+  --color-background: hsl(200deg, 0%, 95%);
+  --color-link: hsl(230deg, 50%, 50%);
+  --color-link-hover: hsl(20deg, 100%, 45%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: hsl(200deg, 30%, 90%);
+    --color-text-muted: hsl(200deg, 5%, 40%);
+    --color-background: hsl(200deg, 10%, 20%);
+    --color-link: hsl(230deg, 50%, 70%);
+    --color-link-hover: hsl(20deg, 100%, 55%);
+  }
+}
+
+* {
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 2rem;
+  max-width: 100ch;
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 0.5rem 1.5rem;
+}
+
+dt {
+  grid-column-start: 1;
+  font-weight: bold;
+}
+
+dd {
+  grid-column-start: 1;
+  margin: 0;
+}
+
+@media (min-width: 500px) {
+  body {
+    margin: 3rem;
+  }
+
+  dl {
+    grid-template-columns: max-content auto;
+  }
+
+  dd {
+    grid-column-start: 2;
+  }
+}
+
+footer {
+  border-top: 1px solid var(--color-text);
+}
+
+footer > .debug {
+  color: var(--color-text-muted);
+}

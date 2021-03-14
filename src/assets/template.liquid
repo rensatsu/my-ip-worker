@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IP Information</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style nonce="{{ nonce }}">
+      {{ style }}
+    </style>
+  </head>
+  <body>
+    <h1>IP Information</h1>
+
+    <dl>
+      <dt>IP</dt>
+      <dd>{{ infodata.ip }}</dd>
+
+      {% if infodata.country %}
+      <dt>Country</dt>
+      <dd>{{ infodata.country }}</dd>
+      {% endif %} {% if infodata.countryCode %}
+      <dt>Country code</dt>
+      <dd>{{ infodata.countryCode }}</dd>
+      {% endif %}
+
+      <dt>ASN</dt>
+      <dd>{{ infodata.asn }}</dd>
+
+      {% if infodata.isp %}
+      <dt>ISP</dt>
+      <dd>{{ infodata.isp }}</dd>
+      {% endif %}
+
+      <dt>User-Agent</dt>
+      <dd>{{ infodata.userAgent }}</dd>
+    </dl>
+
+    <footer>
+      <p>
+        <!-- prettier-ignore-start -->
+        Created by
+        <a href="https://rensatsu.gitlab.io/" target="_blank" rel="noopener">Rensatsu</a>,
+        {{ year }}
+        <!-- prettier-ignore-end -->
+      </p>
+
+      <p class="debug">
+        <time datetime="{{ timestamp }}">{{ datetime }}</time>
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+name = "ip-dev"
+type = "webpack"
+account_id = "4fcfe696e4968f9cdcf63761ed765f2b"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"
+kv_namespaces = [
+  { binding = "ASNCACHE", id = "cbf787d8bb584d85bc2bfcaad3f9eab8", preview_id = "cbf787d8bb584d85bc2bfcaad3f9eab8" }
+]
