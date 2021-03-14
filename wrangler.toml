@@ -1,4 +1,4 @@
-name = "ip-dev"
+name = "ip"
 type = "webpack"
 account_id = "4fcfe696e4968f9cdcf63761ed765f2b"
 workers_dev = true

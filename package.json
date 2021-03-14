@@ -1,7 +1,7 @@
 {
   "name": "my-ip-worker",
   "version": "1.0.0",
-  "description": "My IP Worker",
+  "description": "Cloudflare Worker which shows your IP and some details about your ISP",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development wrangler dev",
