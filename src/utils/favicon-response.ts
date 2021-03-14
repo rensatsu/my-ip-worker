@@ -3,9 +3,9 @@ import faviconSvg from "../assets/favicon.svg";
 /**
  * Create favicon response.
  *
- * @returns {Promise<Response>} (async for compatibility)
+ * @returns {Promise<Response>}
  */
-async function faviconResponse(): Promise<Response> {
+function faviconResponse(): Response {
   return new Response(faviconSvg, {
     status: 200,
     headers: {

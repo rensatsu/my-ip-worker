@@ -101,7 +101,7 @@ async function handleRequest(request: Request): Promise<Response> {
 
   switch (url.pathname) {
     case "/favicon.ico":
-      return await faviconResponse();
+      return faviconResponse();
     case "/ip":
       return await handleIpData(request, ResponseType.TEXT);
     case "/json":
