@@ -10,7 +10,7 @@
     "format": "prettier --write '**/*.{ts,js,css,json,md}'"
   },
   "author": "Rensatsu",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "@cloudflare/workers-types": "^2.1.0",
     "@tsndr/cloudflare-worker-jwt": "^1.0.6",
