@@ -44,6 +44,12 @@ async function getData(request: Request): Promise<Infodata> {
 function detectType(request: Request): ResponseType {
   const hAccept = request.headers?.get("accept") ?? "";
 
+  // Return plain text for CLI tools.
+  const userAgent = (request.headers?.get("user-agent") || "").toLowerCase();
+  if (textAgents.filter((e) => userAgent.includes(e)).length > 0) {
+    return ResponseType.TEXT;
+  }
+
   // Return JSON if requested JSON.
   if (hAccept.includes("json")) {
     return ResponseType.JSON;
@@ -51,12 +57,6 @@ function detectType(request: Request): ResponseType {
 
   // Return text if requested text-only.
   if (hAccept.includes("plain")) {
-    return ResponseType.TEXT;
-  }
-
-  // Return plain text for CLI tools.
-  const userAgent = (request.headers?.get("user-agent") || "").toLowerCase();
-  if (textAgents.filter((e) => userAgent.includes(e)).length > 0) {
     return ResponseType.TEXT;
   }
 
