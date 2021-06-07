@@ -2,6 +2,10 @@
 
 Cloudflare Worker which shows your IP and some details about your ISP.
 
+## Environment variables
+
+* `TEXT_API_ENABLED` - Set to `1` to allow text mode (return only an IP).
+
 ## Formatting
 
 This project uses [`prettier`][prettier] to format the project. To invoke, run `npm run format`.

@@ -15,12 +15,14 @@
 
     <dl>
       <dt>IP</dt>
-      <dd>{{ infodata.ip }}</dd>
+      <dd>{{ ipDisplay }}</dd>
 
       {% if infodata.country %}
       <dt>Country</dt>
       <dd>{{ infodata.country }}</dd>
-      {% endif %} {% if infodata.countryCode %}
+      {% endif %}
+
+      {% if infodata.countryCode %}
       <dt>Country code</dt>
       <dd>{{ infodata.countryCode }}</dd>
       {% endif %}
