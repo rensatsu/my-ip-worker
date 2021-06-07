@@ -1,3 +1,5 @@
+declare const TEXT_API_ENABLED: string;
+
 import { Infodata } from "../structs/info-data";
 import dayjs from "dayjs";
 import templateBuffer from "../assets/template.liquid";
@@ -6,6 +8,17 @@ import ab2str from "arraybuffer-to-string";
 import cryptoRandomString from "crypto-random-string";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
+
+function maskIp(ip: string) {
+  if (TEXT_API_ENABLED === "1") return ip;
+
+  const ipParts = [...ip].map(e => {
+    const rnd = cryptoRandomString({ length: 5 });
+    return `${e}<!--${rnd}-->`;
+  });
+
+  return ipParts.join("");
+}
 
 /**
  * Create HTML response.
@@ -31,6 +44,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   replacements.datetime = now.toISOString();
   replacements.nonce = nonce;
   replacements.style = styleSrc;
+  replacements.ipDisplay = maskIp(data.ip ?? "");
 
   const body = await engine.render(tpl, replacements);
 

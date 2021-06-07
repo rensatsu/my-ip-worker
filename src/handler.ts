@@ -1,3 +1,5 @@
+declare const TEXT_API_ENABLED: string;
+
 import errorResponse from "./utils/error-response";
 import fetchAsnData from "./utils/fetch-asn";
 import { Infodata } from "./structs/info-data";
@@ -65,6 +67,15 @@ function detectType(request: Request): ResponseType {
 }
 
 /**
+ * Check if API is enabled and determine data request type
+ * @param {Request} request Incoming request
+ */
+function checkType(request: Request, forceType: ResponseType | null = null): ResponseType {
+  if (TEXT_API_ENABLED !== "1") return ResponseType.HTML;
+  return forceType ?? detectType(request);
+}
+
+/**
  * Handle IP data request
  * @param {Request} request Incoming request
  * @param {ResponseType} forceType Force response type
@@ -74,7 +85,7 @@ async function handleIpData(
   forceType: ResponseType | null = null,
 ): Promise<Response> {
   const data = await getData(request);
-  const type = forceType ?? detectType(request);
+  const type = checkType(request, forceType);
 
   switch (type) {
     case ResponseType.TEXT:
