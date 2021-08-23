@@ -7,9 +7,9 @@ import ResponseType from "./structs/response-type";
 import textResponse from "./utils/text-response";
 import jsonResponse from "./utils/json-response";
 import htmlResponse from "./utils/html-response";
-import faviconResponse from "./utils/favicon-response";
 import { StatusCodes } from "http-status-codes";
 import textAgents from "./utils/text-agents";
+import staticRouter from "./utils/static-router";
 
 /**
  * Collect user info data
@@ -112,7 +112,8 @@ async function handleRequest(request: Request): Promise<Response> {
 
   switch (url.pathname) {
     case "/favicon.ico":
-      return faviconResponse();
+    case "/assets/style.css":
+      return staticRouter(url.pathname);
     case "/ip":
       return await handleIpData(request, ResponseType.TEXT);
     case "/json":

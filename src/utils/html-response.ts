@@ -30,7 +30,6 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   const engine = new Liquid();
 
   const now = dayjs();
-  const nonce = cryptoRandomString({ length: 15, type: "alphanumeric" });
 
   const templateSrc = ab2str(templateBuffer) as string;
   const styleSrc = ab2str(styleBuffer) as string;
@@ -42,7 +41,6 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   replacements.year = now.format("YYYY");
   replacements.timestamp = now.unix().toString();
   replacements.datetime = now.toISOString();
-  replacements.nonce = nonce;
   replacements.style = styleSrc;
   replacements.ipDisplay = maskIp(data.ip ?? "");
 
@@ -53,7 +51,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
     headers: {
       "cache-control": "no-store",
       "content-type": "text/html",
-      "content-security-policy": `default-src 'none'; img-src 'self'; style-src 'nonce-${nonce}'`,
+      "content-security-policy": "default-src 'none'; img-src 'self'; style-src 'self'",
     },
   });
 }
