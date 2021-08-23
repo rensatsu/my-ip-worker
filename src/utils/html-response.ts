@@ -12,7 +12,7 @@ import { Liquid } from "liquidjs";
 function maskIp(ip: string) {
   if (TEXT_API_ENABLED === "1") return ip;
 
-  const ipParts = [...ip].map(e => {
+  const ipParts = [...ip].map((e) => {
     const rnd = cryptoRandomString({ length: 5 });
     return `${e}<!--${rnd}-->`;
   });
