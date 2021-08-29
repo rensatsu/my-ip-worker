@@ -1,6 +1,7 @@
 import assetStyle from "../assets/style.css";
 import assetFavicon from "../assets/favicon.svg";
 import errorResponse from "./error-response";
+import ms from "ms";
 
 /**
  * Create file response object.
@@ -14,7 +15,7 @@ function fileResponse(file: ArrayBuffer, mime: string, status: number = 200): Re
   return new Response(file, {
     status: status,
     headers: {
-      "cache-control": "max-age=600",
+      "cache-control": `max-age=${ms("14d") / 1000}`,
       "content-type": mime,
     },
   });
