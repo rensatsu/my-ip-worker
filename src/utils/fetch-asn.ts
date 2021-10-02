@@ -3,6 +3,18 @@ declare const ASNCACHE: KVNamespace;
 import Asn from "../structs/asn-data";
 import ms from "ms";
 
+async function getIspName(asn: number | null): Promise<string | null> {
+  if (asn === null) return null;
+
+  const asnData = await fetchAsnData(asn).catch((e) => {
+    console.warn("Unable to fetch ASN data", { asn, e });
+  });
+
+  if (!asnData) return null;
+
+  return `${asnData.description} (${asnData.name})`;
+}
+
 /**
  * Fetch ASN data from bgpview.io API.
  *
@@ -36,4 +48,4 @@ async function fetchAsnData(asn: number): Promise<Asn> {
   return data;
 }
 
-export default fetchAsnData;
+export { getIspName, fetchAsnData };

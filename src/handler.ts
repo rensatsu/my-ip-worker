@@ -1,7 +1,7 @@
 declare const TEXT_API_ENABLED: string;
 
 import errorResponse from "./utils/error-response";
-import fetchAsnData from "./utils/fetch-asn";
+import { getIspName } from "./utils/fetch-asn";
 import { Infodata } from "./structs/info-data";
 import ResponseType from "./structs/response-type";
 import textResponse from "./utils/text-response";
@@ -17,16 +17,7 @@ import staticRouter from "./utils/static-router";
  */
 async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
-  let isp = null;
-
-  if (asn) {
-    try {
-      const asnData = await fetchAsnData(asn);
-      isp = `${asnData.description} (${asnData.name})`;
-    } catch (e) {
-      console.warn("ASN Data fetch failed", e.message, e);
-    }
-  }
+  const isp = await getIspName(asn);
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
