@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import templateBuffer from "../assets/template.liquid";
 import styleBuffer from "../assets/style.css";
 import ab2str from "arraybuffer-to-string";
-import cryptoRandomString from "crypto-random-string";
 import Chance from "chance";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
