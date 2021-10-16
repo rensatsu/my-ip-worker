@@ -6,14 +6,17 @@ import templateBuffer from "../assets/template.liquid";
 import styleBuffer from "../assets/style.css";
 import ab2str from "arraybuffer-to-string";
 import cryptoRandomString from "crypto-random-string";
+import Chance from "chance";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
 
 function maskIp(ip: string) {
   if (TEXT_API_ENABLED === "1") return ip;
 
+  const chance = new Chance();
+
   const ipParts = [...ip].map((e) => {
-    const rnd = cryptoRandomString({ length: 5 });
+    const rnd = chance.string({ length: 5, alpha: true, numeric: true });
     return `${e}<!--${rnd}-->`;
   });
 

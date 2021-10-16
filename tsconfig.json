@@ -3,7 +3,7 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "ES2018",
-    "lib": ["ES2018", "webworker"],
+    "lib": ["ES2018"],
     "alwaysStrict": true,
     "strict": true,
     "preserveConstEnums": true,
