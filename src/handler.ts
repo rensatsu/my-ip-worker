@@ -104,6 +104,7 @@ async function handleRequest(request: Request): Promise<Response> {
   switch (url.pathname) {
     case "/favicon.ico":
     case "/assets/style.css":
+    case "/assets/apple-touch-icon.png":
       return staticRouter(url.pathname);
     case "/ip":
       return await handleIpData(request, ResponseType.TEXT);

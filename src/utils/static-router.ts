@@ -1,5 +1,6 @@
 import assetStyle from "../assets/style.css";
 import assetFavicon from "../assets/favicon.svg";
+import assetTouchIcon from "../assets/apple-touch-icon.png";
 import errorResponse from "./error-response";
 import ms from "ms";
 
@@ -33,6 +34,8 @@ function staticRouter(path: string): Response {
       return fileResponse(assetFavicon, "image/svg+xml");
     case "/assets/style.css":
       return fileResponse(assetStyle, "text/css");
+    case "/assets/apple-touch-icon.png":
+      return fileResponse(assetTouchIcon, "image/png");
     default:
       return errorResponse("Not found", 404);
   }

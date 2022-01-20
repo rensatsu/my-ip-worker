@@ -67,7 +67,7 @@ dd {
 }
 
 footer {
-  border-top: 1px solid var(--color-text);
+  border-top: 1px solid var(--color-text-muted);
 }
 
 footer > .debug {

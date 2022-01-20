@@ -37,7 +37,7 @@ module.exports = function () {
           ],
         },
         {
-          test: /\.(html|liquid|css)?$/,
+          test: /\.(html|liquid|css|png)?$/,
           use: [
             {
               loader: "arraybuffer-loader",
