@@ -17,7 +17,7 @@ import staticRouter from "./utils/static-router";
  */
 async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
-  const isp = await getIspName(asn);
+  const isp = request.cf?.asOrganization ?? await getIspName(asn);
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
