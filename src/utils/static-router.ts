@@ -18,6 +18,7 @@ function fileResponse(file: ArrayBuffer, mime: string, status: number = 200): Re
     headers: {
       "cache-control": `max-age=${ms("14d") / 1000}`,
       "content-type": mime,
+      "x-content-type-options": "nosniff",
     },
   });
 }

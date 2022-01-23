@@ -16,6 +16,7 @@ class ApiResponse extends Response {
   constructor(body?: any, init?: ResponseInit | undefined) {
     const headers = {
       "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
       "content-type": "application/json",
     };
 

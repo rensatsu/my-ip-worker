@@ -16,6 +16,7 @@ function errorResponse(
     headers: {
       "cache-control": "no-store",
       "content-type": "text/plain; charset=utf-8",
+      "x-content-type-options": "nosniff",
     },
   });
 }

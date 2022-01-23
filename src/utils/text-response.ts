@@ -11,6 +11,7 @@ function textResponse(data: Infodata): Response {
     status: 200,
     headers: {
       "cache-control": "no-store",
+      "x-content-type-options": "nosniff",
       "content-type": "text/plain; charset=utf-8",
     },
   });
