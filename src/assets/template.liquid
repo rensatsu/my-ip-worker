@@ -21,9 +21,10 @@
       <dd>{{ infodata.country }}</dd>
       {% endif %}
 
-      {% if infodata.countryCode %}
-      <dt>Country code</dt>
-      <dd>{{ infodata.countryCode }}</dd>
+      {% if infodata.region or infodata.city %}
+      {% assign location = infodata | pick: "region", "city" | join: ", " -%}
+      <dt>Region/City</dt>
+      <dd>{{ location }}</dd>
       {% endif %}
 
       <dt>ASN</dt>

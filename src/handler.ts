@@ -21,7 +21,9 @@ async function getData(request: Request): Promise<Infodata> {
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
-    countryCode: request.headers?.get("cf-ipcountry"),
+    countryCode: request.cf?.country ?? null,
+    region: request.cf?.region ?? null,
+    city: request.cf?.city ?? null,
     asn: asn,
     isp: isp,
     userAgent: request.headers?.get("user-agent"),

@@ -58,7 +58,7 @@ dd {
   }
 
   dl {
-    grid-template-columns: max-content auto;
+    grid-template-columns: minmax(15ch, max-content) auto;
   }
 
   dd {

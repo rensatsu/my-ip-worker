@@ -8,6 +8,7 @@ import ab2str from "arraybuffer-to-string";
 import Chance from "chance";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
+import { pickFilter } from "./pick-filter";
 
 function maskIp(ip: string) {
   if (TEXT_API_ENABLED === "1") return ip;
@@ -30,6 +31,7 @@ function maskIp(ip: string) {
  */
 async function htmlResponse(data: Infodata): Promise<Response> {
   const engine = new Liquid();
+  engine.registerFilter("pick", pickFilter);
 
   const now = dayjs();
 

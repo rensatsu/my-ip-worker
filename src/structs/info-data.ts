@@ -9,6 +9,8 @@ interface InfodataInterface {
   ip?: string | null;
   country?: string | null;
   countryCode?: string | null;
+  region?: string | null;
+  city?: string | null;
   asn?: number | null;
   isp?: string | null;
   userAgent?: string | null;
@@ -47,6 +49,14 @@ class Infodata {
     return this.data.countryCode;
   }
 
+  get region() {
+    return this.data.region;
+  }
+
+  get city() {
+    return this.data.city;
+  }
+
   get asn() {
     return this.data.asn;
   }
@@ -70,6 +80,8 @@ class Infodata {
       ip: this.data.ip,
       country: this.data.country,
       countryCode: this.data.countryCode,
+      region: this.data.region,
+      city: this.data.city,
       asn: this.data.asn,
       isp: this.data.isp,
       userAgent: this.data.userAgent,
