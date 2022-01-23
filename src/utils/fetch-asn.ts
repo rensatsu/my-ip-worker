@@ -12,6 +12,17 @@ async function getIspName(asn: number | null): Promise<string | null> {
 
   if (!asnData) return null;
 
+  // Return either name or description if only one of the fields is available
+  if (asnData.description === "" || asnData.name === "") {
+    return [asnData.name, asnData.description].filter((e) => !!e).at(0) ?? null;
+  }
+
+  // Return only description if both name and description are the same
+  if (asnData.name.toLowerCase() === asnData.description.toLowerCase()) {
+    return asnData.description;
+  }
+
+  // Return both name and description otherwise
   return `${asnData.description} (${asnData.name})`;
 }
 
