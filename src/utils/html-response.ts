@@ -52,7 +52,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
     status: StatusCodes.OK,
     headers: {
       "cache-control": "no-store",
-      "content-type": "text/html",
+      "content-type": "text/html; charset=utf-8",
       "content-security-policy": "default-src 'none'; img-src 'self'; style-src 'self'",
     },
   });
