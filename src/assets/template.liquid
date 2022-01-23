@@ -16,15 +16,17 @@
       <dt>IP</dt>
       <dd>{{ ipDisplay }}</dd>
 
-      {% if infodata.country %}
-      <dt>Country</dt>
-      <dd>{{ infodata.country }}</dd>
-      {% endif %}
-
-      {% if infodata.region or infodata.city %}
-      {% assign location = infodata | pick: "region", "city" | join: ", " -%}
-      <dt>Region/City</dt>
-      <dd>{{ location }}</dd>
+      {% if infodata.country or infodata.region or infodata.city %}
+      <dt>Location</dt>
+      <dd>
+        {% if infodata.country %}
+        <div>{{ infodata.country }}</div>
+        {% endif %}
+        {% if infodata.region or infodata.city %}
+        {% assign location = infodata | pick: "region", "city" | join: ", " -%}
+        <div>{{ location }}</div>
+        {% endif %}
+      </dd>
       {% endif %}
 
       <dt>ASN</dt>
