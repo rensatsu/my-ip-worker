@@ -1,18 +1,18 @@
 :root {
-  --color-text: hsl(200deg, 0%, 25%);
-  --color-text-muted: hsl(200deg, 0%, 65%);
-  --color-background: hsl(200deg, 0%, 97%);
-  --color-link: hsl(230deg, 50%, 50%);
-  --color-link-hover: hsl(20deg, 100%, 45%);
+  --color-text: hsl(200deg 0% 25%);
+  --color-text-muted: hsl(200deg 0% 65%);
+  --color-background: hsl(200deg 0% 97%);
+  --color-link: hsl(230deg 50% 50%);
+  --color-link-hover: hsl(20deg 100% 45%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-text: hsl(200deg, 30%, 90%);
-    --color-text-muted: hsl(200deg, 5%, 40%);
-    --color-background: hsl(200deg, 10%, 20%);
-    --color-link: hsl(230deg, 50%, 70%);
-    --color-link-hover: hsl(20deg, 100%, 55%);
+    --color-text: hsl(0deg 0% 90%);
+    --color-text-muted: hsl(0deg 0% 40%);
+    --color-background: hsl(0deg 0% 20%);
+    --color-link: hsl(230deg 50% 70%);
+    --color-link-hover: hsl(20deg 100% 55%);
   }
 }
 
