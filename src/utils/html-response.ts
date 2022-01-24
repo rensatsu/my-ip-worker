@@ -56,7 +56,8 @@ async function htmlResponse(data: Infodata): Promise<Response> {
       "cache-control": "no-store",
       "content-type": "text/html; charset=utf-8",
       "x-content-type-options": "nosniff",
-      "content-security-policy": "default-src 'none'; img-src 'self'; style-src 'self'",
+      "content-security-policy":
+        "default-src 'none'; img-src 'self'; style-src 'self'",
     },
   });
 }

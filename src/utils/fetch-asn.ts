@@ -42,7 +42,7 @@ async function fetchAsnData(asn: number): Promise<Asn> {
   const response = await fetch(`https://api.bgpview.io/asn/${asn}`);
   if (!response.ok) throw new Error("ASN Data Request Failed");
 
-  const json = await response.json() as any;
+  const json = (await response.json()) as any;
   if (json?.status !== "ok") {
     throw new Error("ASN Data Request returned an error");
   }

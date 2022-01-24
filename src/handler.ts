@@ -17,7 +17,7 @@ import staticRouter from "./utils/static-router";
  */
 async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
-  const isp = request.cf?.asOrganization ?? await getIspName(asn);
+  const isp = request.cf?.asOrganization ?? (await getIspName(asn));
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
@@ -63,7 +63,10 @@ function detectType(request: Request): ResponseType {
  * Check if API is enabled and determine data request type
  * @param {Request} request Incoming request
  */
-function checkType(request: Request, forceType: ResponseType | null = null): ResponseType {
+function checkType(
+  request: Request,
+  forceType: ResponseType | null = null,
+): ResponseType {
   if (TEXT_API_ENABLED !== "1") return ResponseType.HTML;
   return forceType ?? detectType(request);
 }

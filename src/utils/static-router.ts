@@ -3,16 +3,21 @@ import assetFavicon from "../assets/favicon.svg";
 import assetTouchIcon from "../assets/apple-touch-icon.png";
 import errorResponse from "./error-response";
 import ms from "ms";
+import { StatusCodes } from "http-status-codes";
 
 /**
  * Create file response object.
  *
  * @param {ArrayBuffer} file File's ArrayBuffer.
  * @param {string} mime MIME type.
- * @param {number} [status=200] HTTP Status
+ * @param {number} [status=StatusCodes.OK] HTTP Status
  * @returns {Response}
  */
-function fileResponse(file: ArrayBuffer, mime: string, status: number = 200): Response {
+function fileResponse(
+  file: ArrayBuffer,
+  mime: string,
+  status: number = StatusCodes.OK,
+): Response {
   return new Response(file, {
     status: status,
     headers: {

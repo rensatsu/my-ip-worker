@@ -20,7 +20,11 @@ class ApiResponse extends Response {
       "content-type": "application/json",
     };
 
-    const modInit = { ...{ status: StatusCodes.OK }, ...init, ...headers } as ResponseInit;
+    const modInit = {
+      ...{ status: StatusCodes.OK },
+      ...init,
+      ...headers,
+    } as ResponseInit;
 
     super(JSON.stringify(body, null, 2), modInit);
   }
