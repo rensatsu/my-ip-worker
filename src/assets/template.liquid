@@ -23,7 +23,7 @@
         <div>{{ infodata.country }}</div>
         {% endif %}
         {% if infodata.region or infodata.city %}
-        {% assign location = infodata | pick: "region", "city" | join: ", " -%}
+        {% assign location = infodata | pick: "region", "city" | unique | join: ", " -%}
         <div>{{ location | escape }}</div>
         {% endif %}
       </dd>
