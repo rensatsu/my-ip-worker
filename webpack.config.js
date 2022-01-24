@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const mode = process.env.NODE_ENV || "production";
+const mode = process.env.NODE_ENV ?? "production";
 
 console.log("Webpack version", webpack.version);
 
@@ -15,6 +15,10 @@ module.exports = function () {
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
       plugins: [],
+    },
+    performance: {
+      maxAssetSize: 800 * 1024,
+      maxEntrypointSize: 800 * 1024,
     },
     module: {
       rules: [

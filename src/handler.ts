@@ -1,7 +1,7 @@
 declare const TEXT_API_ENABLED: string;
+declare const ASNCACHE: KVNamespace;
 
 import errorResponse from "./utils/error-response";
-import { getIspName } from "./utils/fetch-asn";
 import { Infodata } from "./structs/info-data";
 import ResponseType from "./structs/response-type";
 import textResponse from "./utils/text-response";
@@ -10,6 +10,7 @@ import htmlResponse from "./utils/html-response";
 import { StatusCodes } from "http-status-codes";
 import textAgents from "./utils/text-agents";
 import staticRouter from "./utils/static-router";
+import ms from "ms";
 
 /**
  * Collect user info data
@@ -17,7 +18,7 @@ import staticRouter from "./utils/static-router";
  */
 async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
-  const isp = request.cf?.asOrganization ?? (await getIspName(asn));
+  const isp = request.cf?.asOrganization ?? null;
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
@@ -28,6 +29,16 @@ async function getData(request: Request): Promise<Infodata> {
     isp: isp,
     userAgent: request.headers?.get("user-agent"),
   });
+
+  if (asn !== null && isp !== null) {
+    await ASNCACHE.put(
+      `as${asn}`,
+      JSON.stringify({ name: null, description: isp }),
+      {
+        expirationTtl: ms("1y") / 1000,
+      },
+    );
+  }
 
   return infoData;
 }
