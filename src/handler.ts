@@ -30,10 +30,14 @@ async function getData(request: Request): Promise<Infodata> {
     userAgent: request.headers?.get("user-agent"),
   });
 
-  if (asn !== null && isp !== null) {
+  if (asn !== null) {
     await ASNCACHE.put(
       `as${asn}`,
-      JSON.stringify({ name: null, description: isp }),
+      JSON.stringify({
+        name: null,
+        description: isp,
+        country: request.cf?.country,
+      }),
       {
         expirationTtl: ms("1y") / 1000,
       },
