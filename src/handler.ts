@@ -34,8 +34,7 @@ async function getData(request: Request): Promise<Infodata> {
     await ASNCACHE.put(
       `as${asn}`,
       JSON.stringify({
-        name: null,
-        description: isp,
+        name: isp,
         country: request.cf?.country,
       }),
       {
