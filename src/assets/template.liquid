@@ -24,7 +24,7 @@
         {% endif %}
         {% if infodata.region or infodata.city %}
         {% assign location = infodata | pick: "region", "city" | join: ", " -%}
-        <div>{{ location }}</div>
+        <div>{{ location | escape }}</div>
         {% endif %}
       </dd>
       {% endif %}
@@ -34,11 +34,11 @@
 
       {% if infodata.isp %}
       <dt>ISP</dt>
-      <dd>{{ infodata.isp }}</dd>
+      <dd>{{ infodata.isp | escape }}</dd>
       {% endif %}
 
       <dt>User-Agent</dt>
-      <dd>{{ infodata.userAgent }}</dd>
+      <dd>{{ infodata.userAgent | escape }}</dd>
     </dl>
 
     <footer>
