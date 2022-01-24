@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const mode = process.env.NODE_ENV ?? "production";
+const mode = process.env.NODE_ENV || "production";
 
 console.log("Webpack version", webpack.version);
 
