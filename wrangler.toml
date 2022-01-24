@@ -6,5 +6,5 @@ zone_id = ""
 webpack_config = "webpack.config.js"
 compatibility_date = "2021-10-02"
 kv_namespaces = [
-  { binding = "ASNCACHE", id = "cbf787d8bb584d85bc2bfcaad3f9eab8", preview_id = "cbf787d8bb584d85bc2bfcaad3f9eab8" }
+  { binding = "ASNCACHE", id = "d5c3236cd1684e259b0ee88f630a9ae0", preview_id = "d5c3236cd1684e259b0ee88f630a9ae0" }
 ]
