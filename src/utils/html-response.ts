@@ -5,19 +5,17 @@ import dayjs from "dayjs";
 import templateBuffer from "../assets/template.liquid";
 import styleBuffer from "../assets/style.css";
 import ab2str from "arraybuffer-to-string";
-import Chance from "chance";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
 import { pickFilter } from "./pick-filter";
 import { uniqueFilter } from "./unique-filter";
+import { randomString } from "./random-string";
 
 function maskIp(ip: string) {
   if (TEXT_API_ENABLED === "1") return ip;
 
-  const chance = new Chance();
-
   const ipParts = [...ip].map((e) => {
-    const rnd = chance.string({ length: 5, alpha: true, numeric: true });
+    const rnd = randomString(5);
     return `${e}<!--${rnd}-->`;
   });
 
