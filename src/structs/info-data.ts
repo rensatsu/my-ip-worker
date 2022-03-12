@@ -1,4 +1,5 @@
 import { getName } from "country-list";
+import UAParser from "ua-parser-js";
 
 /**
  * IP Infodata interface.
@@ -14,6 +15,7 @@ interface InfodataInterface {
   asn?: number | null;
   isp?: string | null;
   userAgent?: string | null;
+  browser?: UAParser.IBrowser;
 }
 
 /**
@@ -67,6 +69,10 @@ class Infodata {
 
   get userAgent() {
     return this.data.userAgent;
+  }
+
+  get browser() {
+    return this.data.browser;
   }
 
   /**
