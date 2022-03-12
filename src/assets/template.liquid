@@ -37,6 +37,11 @@
       <dd>{{ infodata.isp | escape }}</dd>
       {% endif %}
 
+      {% if infodata.browser %}
+      <dt>Browser</dt>
+      <dd>{{ infodata.browser.name | append: " " | append: infodata.browser.major | escape }}</dd>
+      {% endif %}
+
       <dt>User-Agent</dt>
       <dd>{{ infodata.userAgent | escape }}</dd>
     </dl>

@@ -11,6 +11,7 @@ import { StatusCodes } from "http-status-codes";
 import textAgents from "./utils/text-agents";
 import staticRouter from "./utils/static-router";
 import ms from "ms";
+import UAParser from "ua-parser-js";
 
 /**
  * Collect user info data
@@ -19,6 +20,9 @@ import ms from "ms";
 async function getData(request: Request): Promise<Infodata> {
   const asn = request.cf?.asn ?? null;
   const isp = request.cf?.asOrganization ?? null;
+  const userAgent = request.headers?.get("user-agent");
+
+  const uaParser = new UAParser(userAgent ?? "");
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
@@ -27,7 +31,8 @@ async function getData(request: Request): Promise<Infodata> {
     city: request.cf?.city ?? null,
     asn: asn,
     isp: isp,
-    userAgent: request.headers?.get("user-agent"),
+    userAgent: userAgent,
+    browser: uaParser.getBrowser(),
   });
 
   if (asn !== null) {
