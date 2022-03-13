@@ -1,0 +1,18 @@
+name: Dependabot Auto Merge
+
+on:
+  pull_request:
+
+  automerge:
+    name: Automerge
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: write
+
+    steps:
+      - uses: fastify/github-action-merge-dependabot@v3.0.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: "ts-loader"
