@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - ".github/**"
+      - ".vscode/**"
+      - "LICENSE"
+      - "README.md"
 
 jobs:
   deploy:
