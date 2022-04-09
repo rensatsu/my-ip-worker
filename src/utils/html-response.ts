@@ -3,7 +3,6 @@ declare const TEXT_API_ENABLED: string;
 import { Infodata } from "../structs/info-data";
 import dayjs from "dayjs";
 import templateBuffer from "../assets/template.liquid";
-import styleBuffer from "../assets/style.css";
 import ab2str from "arraybuffer-to-string";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
@@ -36,7 +35,6 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   const now = dayjs();
 
   const templateSrc = ab2str(templateBuffer) as string;
-  const styleSrc = ab2str(styleBuffer) as string;
   const tpl = engine.parse(templateSrc);
 
   const replacements = {} as Record<string, any>;
@@ -45,7 +43,6 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   replacements.year = now.format("YYYY");
   replacements.timestamp = now.unix().toString();
   replacements.datetime = now.toISOString();
-  replacements.style = styleSrc;
   replacements.ipDisplay = maskIp(data.ip ?? "");
 
   const body = await engine.render(tpl, replacements);
