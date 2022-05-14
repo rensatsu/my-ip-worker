@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@1.3.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          command: publish
+          wranglerVersion: "1.19.11"
