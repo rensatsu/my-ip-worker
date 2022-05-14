@@ -12,7 +12,7 @@
   "author": "Rensatsu",
   "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.9.0",
+    "@cloudflare/workers-types": "^3.10.0",
     "@types/country-list": "^2.1.0",
     "@types/ms": "^0.7.31",
     "@types/ua-parser-js": "^0.7.36",
@@ -28,7 +28,7 @@
     "ts-loader": "^8.0.17",
     "typescript": "^4.6.4",
     "ua-parser-js": "^1.0.2",
-    "webpack": "^5.72.0",
+    "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
   }
 }
