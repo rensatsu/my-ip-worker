@@ -8,7 +8,7 @@ module.exports = function () {
   const cfg = {
     target: "webworker",
     output: {
-      filename: `worker.${mode}.js`,
+      filename: `worker.js`,
       path: path.join(__dirname, "dist"),
     },
     mode,
@@ -31,22 +31,30 @@ module.exports = function () {
         },
         {
           test: /\.svg$/,
+          type: "asset/source",
           use: [
-            {
-              loader: "arraybuffer-loader",
-            },
             {
               loader: "svgo-loader",
             },
           ],
         },
         {
-          test: /\.(html|liquid|css|png)?$/,
-          use: [
-            {
-              loader: "arraybuffer-loader",
+          test: /\.liquid$/,
+          type: "asset/source",
+        },
+        {
+          test: /\.css$/,
+          type: "asset/source",
+        },
+        {
+          test: /\.png$/,
+          type: "asset/inline",
+          generator: {
+            /** @param {Buffer} content */
+            dataUrl(content) {
+              return JSON.stringify([...new Uint8Array(content)]);
             },
-          ],
+          },
         },
       ],
     },

@@ -1,4 +1,3 @@
-declare const TEXT_API_ENABLED: string;
 declare const ASNCACHE: KVNamespace;
 
 import errorResponse from "./utils/error-response";
@@ -12,6 +11,7 @@ import textAgents from "./utils/text-agents";
 import staticRouter from "./utils/static-router";
 import ms from "ms";
 import UAParser from "ua-parser-js";
+import { canUseApi } from "./utils/api-check";
 
 /**
  * Collect user info data
@@ -86,7 +86,7 @@ function checkType(
   request: Request,
   forceType: ResponseType | null = null,
 ): ResponseType {
-  if (TEXT_API_ENABLED !== "1") return ResponseType.HTML;
+  if (canUseApi()) return ResponseType.HTML;
   return forceType ?? detectType(request);
 }
 

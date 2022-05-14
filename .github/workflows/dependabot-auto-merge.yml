@@ -16,5 +16,4 @@ jobs:
       - uses: fastify/github-action-merge-dependabot@v3.1.5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          exclude: "ts-loader"
           target: minor

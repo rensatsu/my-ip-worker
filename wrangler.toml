@@ -1,10 +1,10 @@
 name = "ip"
-type = "webpack"
 workers_dev = true
-route = ""
-zone_id = ""
-webpack_config = "webpack.config.js"
-compatibility_date = "2021-10-02"
+main = "dist/worker.js"
+compatibility_date = "2022-05-14"
 kv_namespaces = [
   { binding = "ASNCACHE", id = "d5c3236cd1684e259b0ee88f630a9ae0", preview_id = "d5c3236cd1684e259b0ee88f630a9ae0" }
 ]
+
+[build]
+command = "npm run build"

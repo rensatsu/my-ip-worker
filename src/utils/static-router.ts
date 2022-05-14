@@ -14,7 +14,7 @@ import { StatusCodes } from "http-status-codes";
  * @returns {Response}
  */
 function fileResponse(
-  file: ArrayBuffer,
+  file: BodyInit,
   mime: string,
   status: number = StatusCodes.OK,
 ): Response {
@@ -26,6 +26,14 @@ function fileResponse(
       "x-content-type-options": "nosniff",
     },
   });
+}
+
+function jsonBufferResponse(
+  file: string,
+  mime: string,
+  status: number = StatusCodes.OK,
+): Response {
+  return fileResponse(new Uint8Array(JSON.parse(file)).buffer, mime, status);
 }
 
 /**
@@ -41,7 +49,7 @@ function staticRouter(path: string): Response {
     case "/assets/style.css":
       return fileResponse(assetStyle, "text/css");
     case "/assets/apple-touch-icon.png":
-      return fileResponse(assetTouchIcon, "image/png");
+      return jsonBufferResponse(assetTouchIcon, "image/png");
     default:
       return errorResponse("Not found", 404);
   }

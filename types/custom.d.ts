@@ -1,29 +1,19 @@
 declare module "*.svg" {
-  const content: ArrayBuffer;
-  export default content;
-}
-
-declare module "*.htm" {
-  const content: ArrayBuffer;
-  export default content;
-}
-
-declare module "*.html" {
-  const content: ArrayBuffer;
+  const content: string;
   export default content;
 }
 
 declare module "*.liquid" {
-  const content: ArrayBuffer;
+  const content: string;
   export default content;
 }
 
 declare module "*.css" {
-  const content: ArrayBuffer;
+  const content: string;
   export default content;
 }
 
 declare module "*.png" {
-  const content: ArrayBuffer;
+  const content: string;
   export default content;
 }

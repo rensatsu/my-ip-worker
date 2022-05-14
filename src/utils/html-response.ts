@@ -1,17 +1,15 @@
-declare const TEXT_API_ENABLED: string;
-
 import { Infodata } from "../structs/info-data";
 import dayjs from "dayjs";
-import templateBuffer from "../assets/template.liquid";
-import ab2str from "arraybuffer-to-string";
+import templateContents from "../assets/template.liquid";
 import { StatusCodes } from "http-status-codes";
 import { Liquid } from "liquidjs";
 import { pickFilter } from "./pick-filter";
 import { uniqueFilter } from "./unique-filter";
 import { randomString } from "./random-string";
+import { canUseApi } from "./api-check";
 
 function maskIp(ip: string) {
-  if (TEXT_API_ENABLED === "1") return ip;
+  if (canUseApi()) return ip;
 
   const ipParts = [...ip].map((e) => {
     const rnd = randomString(5);
@@ -34,8 +32,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
 
   const now = dayjs();
 
-  const templateSrc = ab2str(templateBuffer) as string;
-  const tpl = engine.parse(templateSrc);
+  const tpl = engine.parse(templateContents);
 
   const replacements = {} as Record<string, any>;
 
