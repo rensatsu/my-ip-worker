@@ -19,6 +19,7 @@
     "arraybuffer-to-string": "^1.0.2",
     "country-list": "^2.2.0",
     "dayjs": "^1.11.2",
+    "git-revision-webpack-plugin": "^5.0.0",
     "http-status-codes": "^2.2.0",
     "liquidjs": "^9.37.0",
     "ms": "^2.1.3",

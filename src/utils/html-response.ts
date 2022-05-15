@@ -41,6 +41,8 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   replacements.timestamp = now.unix().toString();
   replacements.datetime = now.toISOString();
   replacements.ipDisplay = maskIp(data.ip ?? "");
+  replacements.commithash = COMMITHASH;
+  replacements.version = VERSION;
 
   const body = await engine.render(tpl, replacements);
 

@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const mode = process.env.NODE_ENV || "production";
+const { GitRevisionPlugin } = require("git-revision-webpack-plugin");
+const gitRevisionPlugin = new GitRevisionPlugin();
 
 console.log("Webpack version", webpack.version);
 
@@ -58,6 +60,13 @@ module.exports = function () {
         },
       ],
     },
+    plugins: [
+      gitRevisionPlugin,
+      new webpack.DefinePlugin({
+        VERSION: JSON.stringify(gitRevisionPlugin.version()),
+        COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
+      }),
+    ],
   };
 
   if (mode !== "production") {
