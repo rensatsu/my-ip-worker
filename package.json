@@ -18,7 +18,7 @@
     "@types/ua-parser-js": "^0.7.36",
     "arraybuffer-to-string": "^1.0.2",
     "country-list": "^2.2.0",
-    "dayjs": "^1.11.4",
+    "dayjs": "^1.11.5",
     "git-revision-webpack-plugin": "^5.0.0",
     "http-status-codes": "^2.2.0",
     "liquidjs": "^9.39.2",
@@ -30,6 +30,6 @@
     "ua-parser-js": "^1.0.2",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "wrangler": "^2.0.24"
+    "wrangler": "^2.0.25"
   }
 }
