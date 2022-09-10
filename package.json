@@ -30,6 +30,6 @@
     "ua-parser-js": "^1.0.2",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
-    "wrangler": "^2.0.28"
+    "wrangler": "^2.0.29"
   }
 }
