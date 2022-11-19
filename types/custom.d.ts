@@ -14,9 +14,6 @@ declare module "*.css" {
 }
 
 declare module "*.png" {
-  const content: string;
+  const content: Uint8Array;
   export default content;
 }
-
-declare const VERSION: string;
-declare const COMMITHASH: string;
