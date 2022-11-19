@@ -29,11 +29,11 @@ function fileResponse(
 }
 
 function jsonBufferResponse(
-  file: string,
+  file: Uint8Array,
   mime: string,
   status: number = StatusCodes.OK,
 ): Response {
-  return fileResponse(new Uint8Array(JSON.parse(file)).buffer, mime, status);
+  return fileResponse(file.buffer, mime, status);
 }
 
 /**
