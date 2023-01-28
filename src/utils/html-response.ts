@@ -1,5 +1,4 @@
 import { Infodata } from "../structs/info-data";
-import dayjs from "dayjs";
 import templateContents from "../assets/template.liquid";
 import { StatusCodes } from "http-status-codes";
 import { engine } from "./liquid";
@@ -11,8 +10,6 @@ import { engine } from "./liquid";
  * @returns {Promise<Response>}
  */
 async function htmlResponse(data: Infodata): Promise<Response> {
-  const now = dayjs();
-
   const tpl = engine.parse(templateContents);
 
   const replacements = {} as Record<string, any>;
