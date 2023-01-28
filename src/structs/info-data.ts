@@ -91,6 +91,7 @@ class Infodata {
       asn: this.data.asn,
       isp: this.data.isp,
       userAgent: this.data.userAgent,
+      browser: this.data.browser,
     };
   }
 }
