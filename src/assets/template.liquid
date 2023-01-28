@@ -14,7 +14,7 @@
 
     <dl>
       <dt>IP</dt>
-      <dd>{{ ipDisplay }}</dd>
+      <dd>{{ infodata.ip | maskIp }}</dd>
 
       {% if infodata.country or infodata.region or infodata.city %}
       <dt>Location</dt>
@@ -50,7 +50,7 @@
       <p>
         Created by
         <a href="https://rensatsu.netlify.app/" target="_blank" rel="noopener">Rensatsu</a>,
-        {{ year }}
+        {{ timestamp | date: "%Y" }}
       </p>
 
       <p>
@@ -60,7 +60,9 @@
       </p>
 
       <p class="debug">
-        <time datetime="{{ timestamp }}">{{ datetime }}</time>
+        <time datetime="{{ timestamp | date: '%s' }}">
+          {{ timestamp | date: "%Y-%m-%dT%H:%M:%S", 0 }}
+        </time>
       </p>
     </footer>
   </body>

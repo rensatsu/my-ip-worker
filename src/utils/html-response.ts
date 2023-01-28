@@ -2,22 +2,7 @@ import { Infodata } from "../structs/info-data";
 import dayjs from "dayjs";
 import templateContents from "../assets/template.liquid";
 import { StatusCodes } from "http-status-codes";
-import { Liquid } from "liquidjs";
-import { pickFilter } from "./pick-filter";
-import { uniqueFilter } from "./unique-filter";
-import { randomString } from "./random-string";
-import { canUseApi } from "./api-check";
-
-function maskIp(ip: string) {
-  if (canUseApi()) return ip;
-
-  const ipParts = [...ip].map((e) => {
-    const rnd = randomString(5);
-    return `${e}<!--${rnd}-->`;
-  });
-
-  return ipParts.join("");
-}
+import { engine } from "./liquid";
 
 /**
  * Create HTML response.
@@ -26,10 +11,6 @@ function maskIp(ip: string) {
  * @returns {Promise<Response>}
  */
 async function htmlResponse(data: Infodata): Promise<Response> {
-  const engine = new Liquid();
-  engine.registerFilter("pick", pickFilter);
-  engine.registerFilter("unique", uniqueFilter);
-
   const now = dayjs();
 
   const tpl = engine.parse(templateContents);
@@ -37,10 +18,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
   const replacements = {} as Record<string, any>;
 
   replacements.infodata = data.toJson();
-  replacements.year = now.format("YYYY");
-  replacements.timestamp = now.unix().toString();
-  replacements.datetime = now.toISOString();
-  replacements.ipDisplay = maskIp(data.ip ?? "");
+  replacements.timestamp = new Date();
 
   const body = await engine.render(tpl, replacements);
 
