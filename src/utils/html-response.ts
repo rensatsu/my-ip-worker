@@ -36,7 +36,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
 
   const replacements = {} as Record<string, any>;
 
-  replacements.infodata = data;
+  replacements.infodata = data.toJson();
   replacements.year = now.format("YYYY");
   replacements.timestamp = now.unix().toString();
   replacements.datetime = now.toISOString();
