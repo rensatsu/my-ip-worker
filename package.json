@@ -27,7 +27,7 @@
     "prettier": "^2.8.7",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
-    "ua-parser-js": "^1.0.34",
+    "ua-parser-js": "^1.0.35",
     "wrangler": "^2.14.0"
   }
 }
