@@ -13,22 +13,22 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     name: Deploy
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
       - name: Prepare node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3.8.1
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: Install node packages
         run: npm ci --ignore-scripts
 
       - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3.1.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
