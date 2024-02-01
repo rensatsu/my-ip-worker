@@ -12,7 +12,7 @@
   "author": "Rensatsu",
   "license": "MIT",
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230821.0",
+    "@cloudflare/workers-types": "^4.20240129.0",
     "@miniflare/tre": "^3.0.0-next.14",
     "@types/country-list": "^2.1.4",
     "@types/ms": "^0.7.34",
