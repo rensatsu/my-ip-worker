@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Prepare node
-        uses: actions/setup-node@v3.8.1
+        uses: actions/setup-node@v4.0.1
         with:
           node-version: "18"
 
@@ -28,7 +28,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Publish
-        uses: cloudflare/wrangler-action@v3.1.1
+        uses: cloudflare/wrangler-action@v3.4.1
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
