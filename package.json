@@ -19,7 +19,7 @@
     "@types/ua-parser-js": "^0.7.39",
     "arraybuffer-to-string": "^1.0.2",
     "country-list": "^2.3.0",
-    "esbuild": "^0.20.1",
+    "esbuild": "^0.23.0",
     "git-revision-webpack-plugin": "^5.0.0",
     "http-status-codes": "^2.3.0",
     "liquidjs": "^10.14.0",
