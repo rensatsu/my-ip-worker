@@ -28,6 +28,6 @@
     "ts-loader": "^9.4.2",
     "typescript": "^5.6.3",
     "ua-parser-js": "^1.0.39",
-    "wrangler": "^3.78.12"
+    "wrangler": "^3.99.0"
   }
 }
