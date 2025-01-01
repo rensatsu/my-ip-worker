@@ -15,6 +15,10 @@ updates:
       - dependency-name: "ua-parser-js"
         versions:
           - ">= 2.0.0"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -22,3 +26,7 @@ updates:
     schedule:
       interval: "monthly"
       time: "11:00"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
