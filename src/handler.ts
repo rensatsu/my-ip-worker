@@ -1,5 +1,4 @@
-declare const ASNCACHE: KVNamespace;
-
+import { Hono } from "hono";
 import type { IncomingRequestCfProperties } from "@cloudflare/workers-types";
 import errorResponse from "./utils/error-response";
 import { Infodata } from "./structs/info-data";
@@ -9,16 +8,17 @@ import jsonResponse from "./utils/json-response";
 import htmlResponse from "./utils/html-response";
 import { StatusCodes } from "http-status-codes";
 import textAgents from "./utils/text-agents";
-import staticRouter from "./utils/static-router";
+import staticAssetsRouter from "./utils/static-router";
 import ms from "ms";
 import { UAParser } from "ua-parser-js";
 import { canUseApi } from "./utils/api-check";
+import type { Bindings } from "./types/bindings";
 
 /**
  * Collect user info data
  * @param {Request} request Incoming request
  */
-async function getData(request: Request): Promise<Infodata> {
+async function getData(request: Request, env: Bindings): Promise<Infodata> {
   const cf = request.cf as IncomingRequestCfProperties | undefined;
   const asn = cf?.asn ?? null;
   const isp = cf?.asOrganization ?? null;
@@ -38,7 +38,7 @@ async function getData(request: Request): Promise<Infodata> {
   });
 
   if (asn !== null) {
-    await ASNCACHE.put(
+    await env.ASNCACHE.put(
       `as${asn}`,
       JSON.stringify({
         name: isp,
@@ -86,9 +86,10 @@ function detectType(request: Request): ResponseType {
  */
 function checkType(
   request: Request,
+  env: Bindings,
   forceType: ResponseType | null = null,
 ): ResponseType {
-  if (canUseApi()) return ResponseType.HTML;
+  if (canUseApi(env)) return ResponseType.HTML;
   return forceType ?? detectType(request);
 }
 
@@ -99,10 +100,11 @@ function checkType(
  */
 async function handleIpData(
   request: Request,
+  env: Bindings,
   forceType: ResponseType | null = null,
 ): Promise<Response> {
-  const data = await getData(request);
-  const type = checkType(request, forceType);
+  const data = await getData(request, env);
+  const type = checkType(request, env, forceType);
 
   switch (type) {
     case ResponseType.TEXT:
@@ -111,38 +113,31 @@ async function handleIpData(
       return jsonResponse(data);
     case ResponseType.HTML:
     default:
-      return await htmlResponse(data);
+      return await htmlResponse(data, env);
   }
 }
 
 /**
- * Respond to the request
- * @param {Request} request Incoming request
+ * Hono application used by the worker runtime.
  */
-async function handleRequest(request: Request): Promise<Response> {
-  const url = new URL(request.url);
-  const method = request.method.toLowerCase();
+const app = new Hono<{ Bindings: Bindings }>();
 
-  if (method !== "get") {
+app.use("*", async (c, next) => {
+  if (c.req.method !== "GET") {
     return errorResponse("Bad request", StatusCodes.BAD_REQUEST);
   }
 
-  if (url.pathname.startsWith("/assets/")) {
-    return staticRouter(url.pathname);
-  }
+  await next();
+});
 
-  switch (url.pathname) {
-    case "/favicon.ico":
-      return staticRouter(url.pathname);
-    case "/ip":
-      return await handleIpData(request, ResponseType.TEXT);
-    case "/json":
-      return await handleIpData(request, ResponseType.JSON);
-    case "/":
-      return await handleIpData(request);
-    default:
-      return errorResponse("Not found", StatusCodes.NOT_FOUND);
-  }
-}
+app.route("/", staticAssetsRouter);
 
-export { handleRequest };
+app.get("/ip", (c) => handleIpData(c.req.raw, c.env, ResponseType.TEXT));
+
+app.get("/json", (c) => handleIpData(c.req.raw, c.env, ResponseType.JSON));
+
+app.get("/", (c) => handleIpData(c.req.raw, c.env));
+
+app.notFound(() => errorResponse("Not found", StatusCodes.NOT_FOUND));
+
+export default app;

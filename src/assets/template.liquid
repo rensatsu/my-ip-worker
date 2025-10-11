@@ -11,7 +11,7 @@
   </head>
   <body>
     <h1>IP Information</h1>
-    <h2>{{ infodata.ip | maskIp }}</h2>
+    <h2>{{ infodata.ip | maskIp: allowTextApi }}</h2>
 
     <dl>
       {% if infodata.country or infodata.region or infodata.city %}

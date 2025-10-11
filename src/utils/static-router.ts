@@ -1,61 +1,60 @@
+import { Hono } from "hono";
+import ms from "ms";
+import { StatusCodes } from "http-status-codes";
 import assetStyle from "../assets/style.css";
 import assetFavicon from "../assets/favicon.svg";
 import assetGithubIcon from "../assets/icons/github.svg";
 import assetTouchIcon from "../assets/apple-touch-icon.png";
 import errorResponse from "./error-response";
-import ms from "ms";
-import { StatusCodes } from "http-status-codes";
+import type { Bindings } from "../types/bindings";
 
-/**
- * Create file response object.
- *
- * @param {ArrayBuffer} file File's ArrayBuffer.
- * @param {string} mime MIME type.
- * @param {number} [status=StatusCodes.OK] HTTP Status
- * @returns {Response}
- */
-function fileResponse(
-  file: BodyInit,
-  mime: string,
-  status: number = StatusCodes.OK,
-): Response {
-  return new Response(file, {
-    status: status,
-    headers: {
-      "cache-control": `max-age=${ms("14d") / 1000}`,
-      "content-type": mime,
-      "x-content-type-options": "nosniff",
-    },
+type StaticAsset = {
+  body: BodyInit;
+  contentType: string;
+};
+
+const cacheSeconds = ms("14d") / 1000;
+
+const baseHeaders = {
+  "cache-control": `max-age=${cacheSeconds}`,
+  "x-content-type-options": "nosniff",
+} as const;
+
+const staticAssets: Record<string, StaticAsset> = {
+  "/favicon.ico": {
+    body: assetFavicon,
+    contentType: "image/svg+xml",
+  },
+  "/assets/style.css": {
+    body: assetStyle,
+    contentType: "text/css",
+  },
+  "/assets/apple-touch-icon.png": {
+    body: assetTouchIcon,
+    contentType: "image/png",
+  },
+  "/assets/icons/github.svg": {
+    body: assetGithubIcon,
+    contentType: "image/svg+xml",
+  },
+};
+
+const staticRouter = new Hono<{ Bindings: Bindings }>();
+
+Object.entries(staticAssets).forEach(([path, asset]) => {
+  staticRouter.get(path, () => {
+    return new Response(asset.body, {
+      status: StatusCodes.OK,
+      headers: {
+        ...baseHeaders,
+        "content-type": asset.contentType,
+      },
+    });
   });
-}
+});
 
-function jsonBufferResponse(
-  file: Uint8Array,
-  mime: string,
-  status: number = StatusCodes.OK,
-): Response {
-  return fileResponse(file.buffer, mime, status);
-}
-
-/**
- * Create a response object router for static files.
- *
- * @param {string} path
- * @returns {Response}
- */
-function staticRouter(path: string): Response {
-  switch (path) {
-    case "/favicon.ico":
-      return fileResponse(assetFavicon, "image/svg+xml");
-    case "/assets/style.css":
-      return fileResponse(assetStyle, "text/css");
-    case "/assets/apple-touch-icon.png":
-      return jsonBufferResponse(assetTouchIcon, "image/png");
-    case "/assets/icons/github.svg":
-      return fileResponse(assetGithubIcon, "image/svg+xml");
-    default:
-      return errorResponse("Not found", 404);
-  }
-}
+staticRouter.notFound(() =>
+  errorResponse("Not found", StatusCodes.NOT_FOUND),
+);
 
 export default staticRouter;

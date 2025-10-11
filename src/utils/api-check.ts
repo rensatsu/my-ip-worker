@@ -1,7 +1,8 @@
-declare const TEXT_API_ENABLED: string;
+import type { Bindings } from "../types/bindings";
 
-function canUseApi(): boolean {
-  return typeof TEXT_API_ENABLED === undefined && TEXT_API_ENABLED !== "1";
+function canUseApi(env?: Bindings): boolean {
+  if (!env) return false;
+  return typeof env.TEXT_API_ENABLED === undefined && env.TEXT_API_ENABLED !== "1";
 }
 
 export { canUseApi };

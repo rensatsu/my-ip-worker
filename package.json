@@ -11,6 +11,9 @@
   },
   "author": "Rensatsu",
   "license": "MIT",
+  "dependencies": {
+    "hono": "^4.9.11"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251011.0",
     "@miniflare/tre": "^3.0.0-next.14",

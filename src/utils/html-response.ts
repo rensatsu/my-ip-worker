@@ -2,6 +2,8 @@ import { Infodata } from "../structs/info-data";
 import templateContents from "../assets/template.liquid";
 import { StatusCodes } from "http-status-codes";
 import { engine } from "./liquid";
+import { canUseApi } from "./api-check";
+import type { Bindings } from "../types/bindings";
 
 /**
  * Create HTML response.
@@ -9,13 +11,14 @@ import { engine } from "./liquid";
  * @param {Infodata} data User info data.
  * @returns {Promise<Response>}
  */
-async function htmlResponse(data: Infodata): Promise<Response> {
+async function htmlResponse(data: Infodata, env: Bindings): Promise<Response> {
   const tpl = engine.parse(templateContents);
 
   const replacements = {} as Record<string, any>;
 
   replacements.infodata = data.toJson();
   replacements.timestamp = new Date();
+  replacements.allowTextApi = canUseApi(env);
 
   const body = await engine.render(tpl, replacements);
 
