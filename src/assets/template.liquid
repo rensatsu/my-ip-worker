@@ -11,11 +11,9 @@
   </head>
   <body>
     <h1>IP Information</h1>
+    <h2>{{ infodata.ip | maskIp }}</h2>
 
     <dl>
-      <dt>IP</dt>
-      <dd>{{ infodata.ip | maskIp }}</dd>
-
       {% if infodata.country or infodata.region or infodata.city %}
       <dt>Location</dt>
       <dd>
@@ -47,21 +45,26 @@
     </dl>
 
     <footer>
-      <p>
-        Created by
-        <a href="https://rensatsu.com/" target="_blank" rel="noopener">Rensatsu</a>,
-        {{ timestamp | date: "%Y" }}
-      </p>
+      <div class="link-pills">
+        <a href="https://rensatsu.com/" target="_blank" rel="noopener">
+          <picture>
+            <source srcset="https://rensatsu.com/img/avatar_2025_min.avif" type="image/avif">
+            <source srcset="https://rensatsu.com/img/avatar_2025_min.webp" type="image/webp">
+            <source srcset="https://rensatsu.com/img/avatar_2025_min.jpg" type="image/jpeg">
+            <img src="https://rensatsu.com/img/avatar_2025_min.jpg" alt="Avatar" aria-hidden="true">
+          </picture>
+          Created by Rensatsu
+        </a>
 
-      <p>
         <a href="https://github.com/rensatsu/my-ip-worker" target="_blank" rel="noopener">
+          <img src="/assets/icons/github.svg" alt="Avatar" aria-hidden="true">
           View source code on GitHub
         </a>
-      </p>
+      </div>
 
       <p class="debug">
         <time datetime="{{ timestamp | date: '%s' }}">
-          {{ timestamp | date: "%Y-%m-%dT%H:%M:%S", 0 }}
+          {{ timestamp | date: "%b %d, %Y at %H:%M:%S", 0 }}
         </time>
       </p>
     </footer>

@@ -26,7 +26,7 @@ async function htmlResponse(data: Infodata): Promise<Response> {
       "content-type": "text/html; charset=utf-8",
       "x-content-type-options": "nosniff",
       "content-security-policy":
-        "default-src 'none'; img-src 'self'; style-src 'self'",
+        "default-src 'none'; img-src 'self' https://rensatsu.com; style-src 'self'",
     },
   });
 }

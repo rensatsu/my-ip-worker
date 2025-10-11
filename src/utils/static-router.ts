@@ -1,5 +1,6 @@
 import assetStyle from "../assets/style.css";
 import assetFavicon from "../assets/favicon.svg";
+import assetGithubIcon from "../assets/icons/github.svg";
 import assetTouchIcon from "../assets/apple-touch-icon.png";
 import errorResponse from "./error-response";
 import ms from "ms";
@@ -50,6 +51,8 @@ function staticRouter(path: string): Response {
       return fileResponse(assetStyle, "text/css");
     case "/assets/apple-touch-icon.png":
       return jsonBufferResponse(assetTouchIcon, "image/png");
+    case "/assets/icons/github.svg":
+      return fileResponse(assetGithubIcon, "image/svg+xml");
     default:
       return errorResponse("Not found", 404);
   }

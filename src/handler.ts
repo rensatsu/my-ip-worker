@@ -1,5 +1,6 @@
 declare const ASNCACHE: KVNamespace;
 
+import type { IncomingRequestCfProperties } from "@cloudflare/workers-types";
 import errorResponse from "./utils/error-response";
 import { Infodata } from "./structs/info-data";
 import ResponseType from "./structs/response-type";
@@ -10,7 +11,7 @@ import { StatusCodes } from "http-status-codes";
 import textAgents from "./utils/text-agents";
 import staticRouter from "./utils/static-router";
 import ms from "ms";
-import UAParser from "ua-parser-js";
+import { UAParser } from "ua-parser-js";
 import { canUseApi } from "./utils/api-check";
 
 /**
@@ -18,17 +19,18 @@ import { canUseApi } from "./utils/api-check";
  * @param {Request} request Incoming request
  */
 async function getData(request: Request): Promise<Infodata> {
-  const asn = request.cf?.asn ?? null;
-  const isp = request.cf?.asOrganization ?? null;
+  const cf = request.cf as IncomingRequestCfProperties | undefined;
+  const asn = cf?.asn ?? null;
+  const isp = cf?.asOrganization ?? null;
   const userAgent = request.headers?.get("user-agent");
 
   const uaParser = new UAParser(userAgent ?? "");
 
   const infoData = new Infodata({
     ip: request.headers?.get("cf-connecting-ip"),
-    countryCode: request.cf?.country ?? null,
-    region: request.cf?.region ?? null,
-    city: request.cf?.city ?? null,
+    countryCode: cf?.country ?? null,
+    region: cf?.region ?? null,
+    city: cf?.city ?? null,
     asn: asn,
     isp: isp,
     userAgent: userAgent,
@@ -40,7 +42,7 @@ async function getData(request: Request): Promise<Infodata> {
       `as${asn}`,
       JSON.stringify({
         name: isp,
-        country: request.cf?.country,
+        country: cf?.country,
       }),
       {
         expirationTtl: ms("1y") / 1000,
@@ -125,10 +127,12 @@ async function handleRequest(request: Request): Promise<Response> {
     return errorResponse("Bad request", StatusCodes.BAD_REQUEST);
   }
 
+  if (url.pathname.startsWith("/assets/")) {
+    return staticRouter(url.pathname);
+  }
+
   switch (url.pathname) {
     case "/favicon.ico":
-    case "/assets/style.css":
-    case "/assets/apple-touch-icon.png":
       return staticRouter(url.pathname);
     case "/ip":
       return await handleIpData(request, ResponseType.TEXT);
