@@ -17,12 +17,12 @@ jobs:
     name: Deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v5
 
       - name: Prepare node
-        uses: actions/setup-node@v4.4.0
+        uses: actions/setup-node@v5
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install node packages
         run: npm ci --ignore-scripts
@@ -33,3 +33,4 @@ jobs:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           command: deploy
+          wranglerVersion: "4.38.0"
