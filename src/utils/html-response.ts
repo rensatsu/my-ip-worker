@@ -29,7 +29,7 @@ async function htmlResponse(data: Infodata, env: Bindings): Promise<Response> {
       "content-type": "text/html; charset=utf-8",
       "x-content-type-options": "nosniff",
       "content-security-policy":
-        "default-src 'none'; img-src 'self' https://rensatsu.com; style-src 'self'; script-src 'self' https://u.rensatsu.com",
+        "default-src 'none'; img-src 'self' https://rensatsu.com; style-src 'self'; script-src 'self' https://u.rensatsu.com; connect-src 'self' https://u.rensatsu.com",
     },
   });
 }
