@@ -1,9 +1,8 @@
-import ab2str from "arraybuffer-to-string";
-
 function randomString(numBytes: number): string {
-  const rnd = new Uint32Array(numBytes);
-  crypto.getRandomValues(rnd);
-  return ab2str(rnd, "hex");
+  const rnd = crypto.getRandomValues(new Uint8Array(numBytes));
+  return Array.from(rnd)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 export { randomString };

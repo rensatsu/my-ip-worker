@@ -1,7 +1,7 @@
 name = "ip"
 workers_dev = true
 main = "dist/index.js"
-compatibility_date = "2022-05-14"
+compatibility_date = "2026-01-01"
 send_metrics = false
 kv_namespaces = [
   { binding = "ASNCACHE", id = "d5c3236cd1684e259b0ee88f630a9ae0", preview_id = "d5c3236cd1684e259b0ee88f630a9ae0" }
