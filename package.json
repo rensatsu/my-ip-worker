@@ -12,7 +12,7 @@
   "author": "Rensatsu",
   "license": "MIT",
   "dependencies": {
-    "hono": "^4.11.4"
+    "hono": "^4.11.7"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260101.0",
